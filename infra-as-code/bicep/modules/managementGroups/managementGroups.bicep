@@ -6,7 +6,7 @@ metadata description = 'ALZ Bicep Module to set up Management Group structure'
 @sys.description('Prefix for the management group hierarchy. This management group will be created as part of the deployment.')
 @minLength(2)
 @maxLength(10)
-param parTopLevelManagementGroupPrefix string = 'byrn'
+param parTopLevelManagementGroupPrefix string = ''
 
 @sys.description('Optional suffix for the management group hierarchy. This suffix will be appended to management group names/IDs. Include a preceding dash if required. Example: -suffix')
 @maxLength(10)
@@ -14,7 +14,7 @@ param parTopLevelManagementGroupSuffix string = ''
 
 @sys.description('Display name for top level management group. This name will be applied to the management group prefix defined in parTopLevelManagementGroupPrefix parameter.')
 @minLength(2)
-param parTopLevelManagementGroupDisplayName string = 'ALZ Lab 1'
+param parTopLevelManagementGroupDisplayName string = ''
 
 @sys.description('Optional parent for Management Group hierarchy, used as intermediate root Management Group parent, if specified. If empty, default, will deploy beneath Tenant Root Management Group.')
 param parTopLevelManagementGroupParentId string = ''
