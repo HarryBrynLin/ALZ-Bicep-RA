@@ -143,6 +143,26 @@ In this example, the management groups are created at the `Tenant Root Group` th
 
 ### Azure CLI
 
+If you get 
+
+``` {"code": "AuthorizationFailed", "message": "The client 'user@domain.com' with object id '41db081c-8321-405f-9b77-9fc57100f4aa' does not have authorization to perform action 'Microsoft.Resources/deployments/validate/action' over scope '/providers/Microsoft.Resources/deployments/alz-deployment-mg' or the scope is invalid. If access was recently granted, please refresh your credentials."} ```
+
+Then you need to run:
+
+  `$user =  Get-AzADUser -ObjectId {ObjectID from error}`
+  `New-AzRoleAssignment -Scope '/' -RoleDefinitionName 'Owner' -ObjectId $user.Id`
+  
+10 minutes to replicate the Azure AD changes, log out and back in and you should now be able to deploy the Landing Zone.
+Note: Remember to go back and change the toggle to ‘Allow management of Azure resources’ to ‘No’, or all Global Administrators of Azure Active Directory will be able to manage all Azure resources.
+
+Once the Landing Zone is deployed, you should also remove your role assignment at the root level by running:
+
+`Remove-AzRoleAssignment -Scope '/' -RoleDefinitionName 'Owner' -ObjectId $user.Id`
+
+
+
+
+
 ```bash
 # For Azure global regions
 
